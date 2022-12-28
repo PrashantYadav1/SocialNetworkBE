@@ -23,7 +23,7 @@ namespace SocialNetworkBE.Controllers
         }
 
         [HttpPost]
-        [Route("Registration")]
+        [Route("Reg")]
         public Response Registration(Registration registration)
         {
             Response response = new Response();
@@ -31,7 +31,7 @@ namespace SocialNetworkBE.Controllers
             dal = new DAL();
             response = dal.Registration(registration, connection);
             return response;
-
+            //As token Controller already declared hence method route get concatineated ...localhost/api/Controller/Registration
         }
         [HttpPost]
         [Route("Login")]
