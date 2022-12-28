@@ -26,8 +26,9 @@ namespace SocialNetworkBE
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(); // Make sure you call this previous to AddMvc
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialNetworkBE", Version = "v1" });
@@ -54,6 +55,10 @@ namespace SocialNetworkBE
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors(
+        options => options.WithOrigins("http://example.com").AllowAnyMethod()
+    );
         }
     }
 }
