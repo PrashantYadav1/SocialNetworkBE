@@ -28,7 +28,7 @@ namespace SocialNetworkBE
         {
             services.AddCors(); // Make sure you call this previous to AddMvc
             services.AddControllers();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialNetworkBE", Version = "v1" });
@@ -46,7 +46,11 @@ namespace SocialNetworkBE
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(
+                     options => 
+                     { 
+                         options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); 
+                     });
             app.UseRouting();
 
             app.UseAuthorization();
@@ -56,9 +60,7 @@ namespace SocialNetworkBE
                 endpoints.MapControllers();
             });
 
-            app.UseCors(
-        options => options.WithOrigins("http://example.com").AllowAnyMethod()
-    );
+
         }
     }
 }
