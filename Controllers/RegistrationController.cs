@@ -21,7 +21,8 @@ namespace SocialNetworkBE.Controllers
         {
             _configuration = configuration;
         }
-
+        //readonly can be changed in contructor
+        //const used for absolute constant value it is intialized while declaring bcz it can't change
         [HttpPost]
         [Route("Reg")]
         public Response Registration(Registration registration)
@@ -40,7 +41,7 @@ namespace SocialNetworkBE.Controllers
             Response response = new Response();
             connection = new SqlConnection(_configuration.GetConnectionString("SqCon"));
             dal = new DAL();
-            dal.Login(registration, connection);
+            response=dal.Login(registration, connection);
 
             return response;
         }
